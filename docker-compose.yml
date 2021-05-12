@@ -9,7 +9,7 @@ services:
     container_name: tron-node
     restart: always
     volumes:
-      - ./datadir:/java-tron/data
+      - /home/tron/datadir:/java-tron/data
     logging:
       driver: "json-file"
       options:
