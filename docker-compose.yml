@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  tron-node:
+    image: java-tron
+    build:
+      context: .
+      dockerfile: ./Dockerfile.mainnet
+    container_name: tron-node
+    restart: always
+    volumes:
+      - ./datadir:/java-tron/data
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "1m"
+    ports:
+      - "8080:8080" # HTTP
+      - "8090:8090" # HTTP
+      - "18888:18888" # HTTP
+      - "50051:50051" # Full node
+    #   - "50052:50052" # Solidity node (deprecated)
+
+  # tron-node:
+  #   image: tron-node
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.mainnet
+  #   container_name: tron-node
+  #   # volumes:
+  #   #   - ./datadir:/tron/FullNode/output-directory
+  #   ports:
+  #     - "9090:9090" # HTTP
+  #     - "50051:50051" # Full node
+  #   #   - "50052:50052" # Solidity node (deprecated)

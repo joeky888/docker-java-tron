@@ -1,0 +1,11 @@
+FROM tronprotocol/java-tron:v4.1.1
+
+ENV BASE_DIR="/java-tron"
+WORKDIR $BASE_DIR
+COPY conf/mainnet.conf ${BASE_DIR}
+COPY conf/logback.xml ${BASE_DIR}
+
+HEALTHCHECK --interval=5s --timeout=3s \
+  CMD curl -fs http://localhost:8090/wallet/getnodeinfo || exit 1
+
+CMD [ "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
