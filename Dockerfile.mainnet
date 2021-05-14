@@ -8,4 +8,4 @@ COPY conf/logback.xml ${BASE_DIR}
 HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl -fs http://localhost:8090/wallet/getnodeinfo || exit 1
 
-CMD [ "-jvm", "'{-Xmx10g -Xms10g}'" "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
+CMD [ "-jvm", "\"{-Xmx10g -Xms10g}\"" "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
