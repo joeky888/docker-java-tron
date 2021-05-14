@@ -8,4 +8,8 @@ COPY conf/logback.xml ${BASE_DIR}
 HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl -fs http://localhost:8090/wallet/getnodeinfo || exit 1
 
-CMD [ "-jvm", "{-Xmx10g -Xms10g}", "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
+RUN wget https://github.com/tronprotocol/java-tron/releases/download/GreatVoyage-v4.2.0/FullNode.jar
+
+ENTRYPOINT [ "java", "-Xmx10g", "-Xms10g", "-jar", "/java-tron/FullNode.jar" ]
+CMD [ "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
+# CMD [ "-jvm", "{-Xmx10g -Xms10g}", "-c", "/java-tron/mainnet.conf", "--log-config", "/java-tron/logback.xml", "-d", "/java-tron/data", "-w" ]
